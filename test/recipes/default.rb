@@ -18,7 +18,7 @@ cookbook_file "/tmp/install_env" do
   owner 'root'
   group 'root'
   mode 0777
-  action : create
+  action :create
 end
 
 execute "install_env" do
