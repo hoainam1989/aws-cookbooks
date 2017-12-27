@@ -1,16 +1,10 @@
 
-Chef::Log.info("******Creating a data directory.******")
+Chef::Log.info("******Creating ENV.******")
 
-data_dir = value_for_platform(
-  "centos" => { "default" => "/srv/www/shared" },
-  "ubuntu" => { "default" => "/srv/www/data" },
-  "default" => "/srv/www/config"
-)
-
-directory data_dir do
-  mode 0755
+cookbook_file "/tmp/install_env" do
+  source "install.sh"
   owner 'root'
   group 'root'
-  recursive true
-  action :create
+  mode 0777
+  action :create_if_missing
 end
