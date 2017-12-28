@@ -14,6 +14,8 @@ Chef::Log.info("********** The app's user is '#{node['deploy']['nodejsapp']['use
 
 # Clone code
 git app_path do
+  owner "#{run_as}"
+  group "#{run_as}"
   repository app["app_source"]["url"]
   revision 'master'
   action :sync
