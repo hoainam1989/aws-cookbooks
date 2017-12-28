@@ -1,0 +1,5 @@
+default['test']['DB_ENDPOINT'] = 'localhost'
+default['test']['DB_USER'] = 'test'
+default['test']['DB_PASS'] = 'a@@123$%%^'
+default['test']['DB_NAME'] = 'test'
+default['test']['ENV'] = 'local'
