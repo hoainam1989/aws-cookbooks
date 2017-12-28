@@ -35,9 +35,21 @@ execute "install_env" do
 end
 
 # Install App and Start App
+
+# Config
 template  "#{app_path}/config/#{env}.json" do
   source "config.json.erb"
   owner "#{run_as}"
   group "#{run_as}"
   mode 0600
+end
+
+# Start Application
+bash "start_app" do
+  user "#{run_as}"
+  cwd "#{app_path}"
+  code <<-EOH
+    npm install
+    NODE_ENV=#{env} forever start index.js  
+  EOH
 end
