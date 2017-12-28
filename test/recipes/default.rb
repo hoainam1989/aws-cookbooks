@@ -46,10 +46,9 @@ end
 
 # Start Application
 bash "start_app" do
-  user "#{run_as}"
+  user 'root'
   cwd "#{app_path}"
   code <<-EOH
-    npm install
-    NODE_ENV=#{env} forever start index.js  
+    sudo -u #{run_as}  npm install && NODE_ENV=#{env} forever start index.js  
   EOH
 end
