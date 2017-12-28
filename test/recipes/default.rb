@@ -2,8 +2,8 @@
 Chef::Log.info("******Creating ENV.******")
 # show app information
 app = search(:aws_opsworks_app).first
-app_path = "/srv/#{app['shortname']}"
 run_as = "#{node['my_app']['nodejsapp']['runas']}"
+app_path = "/home/#{run_as}/#{app['shortname']}"
 env = "#{node['test']['ENV']}"
 
 Chef::Log.info("********** The app's ENV is '#{env}' **********")
@@ -14,11 +14,11 @@ Chef::Log.info("********** The app's user is '#{node['deploy']['nodejsapp']['use
 
 # Clone code
 git app_path do
-  owner "#{run_as}"
-  group "#{run_as}"
   repository app["app_source"]["url"]
   revision 'master'
   action :sync
+  user "#{run_as}"
+  group "#{run_as}"
 end
 
 # Prepare Env node
